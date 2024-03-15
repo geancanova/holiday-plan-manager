@@ -1,16 +1,10 @@
 import { PAGE_SIZE } from "../utils/constants";
 import supabase from "./supabase";
 
-export async function getPlans({ sortBy, page }) {
+export async function getPlans(page) {
   let query = supabase
     .from("plans")
     .select("id, created_at, title, description, teams(id, title)", { count: "exact" })
-
-  // SORT
-  if (sortBy)
-    query = query.order(sortBy.field, {
-      ascending: sortBy.direction === "asc",
-    });
 
   // PAGINATION
   if (page) {
@@ -28,6 +22,21 @@ export async function getPlans({ sortBy, page }) {
   }
 
   return { data, count };
+}
+
+export async function getPlan(id) {
+  const { data, error } = await supabase
+    .from("plans")
+    .select("*")
+    .eq("id", id)
+    .single();
+
+  if (error) {
+    console.error(error);
+    throw new Error("Plan not found");
+  }
+
+  return data;
 }
 
 export async function createEditPlan(newPlan, id) {
