@@ -1,24 +1,39 @@
-import styled from "styled-components";
-import { useDarkMode } from "../context/DarkModeContext";
+import styled, { css } from "styled-components";
+const sizes = {
+  small: css`
+    height: 3.5rem;
+  `,
+  medium: css`
+    height: 5rem;
+  `,
+};
 
 const StyledLogo = styled.div`
   text-align: center;
 `;
 
 const Img = styled.img`
-  height: 9.6rem;
+  display: block;
+  height: 5rem;
   width: auto;
+  margin: auto;
+  ${(props) => sizes[props.$size]}
 `;
 
-function Logo() {
-  const { isDarkMode } = useDarkMode();
-  const logoSrc = isDarkMode ? "/logo-dark.png" : "/logo-light.png";
-
+function Logo({ size }) {
   return (
     <StyledLogo>
-      <Img src={logoSrc} alt="Logo" />
+      <Img
+        $size={size}
+        src="./logo-holiday-plan-manager.png"
+        alt="Holiday Plan Manager"
+      />
     </StyledLogo>
   );
 }
+
+Logo.defaultProps = {
+  $size: "medium",
+};
 
 export default Logo;

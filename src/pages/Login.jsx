@@ -1,6 +1,5 @@
 import styled from "styled-components";
 import LoginForm from "../features/authentication/LoginForm";
-import Heading from "../ui/Heading";
 import Logo from "../ui/Logo";
 
 const LoginLayout = styled.main`
@@ -17,7 +16,6 @@ function Login() {
   return (
     <LoginLayout>
       <Logo />
-      <Heading as="h4">Log in to yout account</Heading>
       <LoginForm />
     </LoginLayout>
   );

@@ -1,5 +1,6 @@
 import styled from "styled-components";
 import HeaderMenu from "./HeaderMenu";
+import Logo from "./Logo";
 
 const StyledHeader = styled.header`
   background-color: var(--color-grey-0);
@@ -9,12 +10,13 @@ const StyledHeader = styled.header`
   display: flex;
   gap: 2.4rem;
   align-items: center;
-  justify-content: flex-end;
+  justify-content: space-between;
 `;
 
 function Header() {
   return (
     <StyledHeader>
+      <Logo size="small" />
       <HeaderMenu />
     </StyledHeader>
   );
