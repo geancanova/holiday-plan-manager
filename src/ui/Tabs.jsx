@@ -31,10 +31,6 @@ const StyledTab = styled.button`
   }
 `;
 
-const StyledTabContent = styled.div`
-  padding: 1rem 0;
-`;
-
 const StyledTabActions = styled.div`
   display: flex;
   justify-content: flex-end;
@@ -49,8 +45,6 @@ function Tabs({ children, defaultTab }) {
   const tab = searchParams.get("tab");
   const [openName, setOpenName] = useState(tab || defaultTab);
   const open = setOpenName;
-
-  console.log(openName);
 
   return (
     <TabsContext.Provider value={{ openName, open, setSearchParams }}>
@@ -84,7 +78,7 @@ function TabContent({ children, name }) {
 
   if (name !== openName) return null;
 
-  return <StyledTabContent>{children}</StyledTabContent>;
+  return <div>{children}</div>;
 }
 
 function TabActions({ children }) {
