@@ -2,8 +2,7 @@ import styled from "styled-components";
 import Heading from "./Heading";
 
 const StyledPageHeader = styled.div`
-  padding: 1.2rem 0 3rem;
-  border-bottom: 1px solid var(--color-grey-100);
+  padding: 1.2rem 0 0;
   display: flex;
   gap: 2.4rem;
   align-items: center;
