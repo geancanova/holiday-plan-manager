@@ -7,11 +7,6 @@ export function usePlans() {
   const queryClient = useQueryClient();
   const [searchParams] = useSearchParams();
 
-  // SORT
-  const sortByRaw = searchParams.get("sortBy") || "title-asc";
-  const [field, direction] = sortByRaw.split("-");
-  const sortBy = { field, direction };
-
   // PAGINATION
   const page = !searchParams.get("page") ? 1 : Number(searchParams.get("page"));
 
@@ -21,8 +16,8 @@ export function usePlans() {
     data: { data: plans, count } = {},
     error,
   } = useQuery({
-    queryKey: ["plans", sortBy, page],
-    queryFn: () => getPlans({ sortBy, page }),
+    queryKey: ["plans", page],
+    queryFn: () => getPlans(page),
   });
 
   // PRE-FETCHING
@@ -30,14 +25,14 @@ export function usePlans() {
 
   if (page < pageCount)
     queryClient.prefetchQuery({
-      queryKey: ["plans", sortBy, page + 1],
-      queryFn: () => getPlans({ sortBy, page: page + 1 }),
+      queryKey: ["plans", page + 1],
+      queryFn: () => getPlans({ page: page + 1 }),
     });
 
   if (page > 1)
     queryClient.prefetchQuery({
-      queryKey: ["plans", sortBy, page - 1],
-      queryFn: () => getPlans({ sortBy, page: page - 1 }),
+      queryKey: ["plans", page - 1],
+      queryFn: () => getPlans({ page: page - 1 }),
     });
 
   return { isLoading, error, plans, count };
