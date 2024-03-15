@@ -25,7 +25,7 @@ function Logo({ size }) {
     <StyledLogo>
       <Img
         $size={size}
-        src="./logo-holiday-plan-manager.png"
+        src="/logo-holiday-plan-manager.png"
         alt="Holiday Plan Manager"
       />
     </StyledLogo>
