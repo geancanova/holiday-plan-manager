@@ -5,7 +5,7 @@ import Button from "../ui/Button";
 import Spinner from "../ui/Spinner";
 import Tabs from "../ui/Tabs";
 import HolidayTable from "../features/holidays/HolidayTable";
-import AddHoliday from "../features/holidays/AddhOLIDAY";
+import AddHoliday from "../features/holidays/AddHoliday";
 import EmployeesTable from "../features/employees/EmployeesTable";
 
 function Plan() {
