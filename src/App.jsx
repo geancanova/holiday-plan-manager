@@ -5,11 +5,12 @@ import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
 import { DarkModeProvider } from "./context/DarkModeContext";
 import { Toaster } from "react-hot-toast";
 
+import AppLayout from "./ui/AppLayout";
+import ProtectedRoute from "./ui/ProtectedRoute";
 import Login from "./pages/Login";
 import PageNotFound from "./pages/PageNotFound";
-import ProtectedRoute from "./ui/ProtectedRoute";
-import AppLayout from "./ui/AppLayout";
 import Plans from "./pages/Plans";
+import Plan from "./pages/Plan";
 
 const queryClient = new QueryClient({
   defaultOptions: {
@@ -36,7 +37,7 @@ function App() {
             >
               <Route index element={<Navigate replace to="/plans" />} />
               <Route path="/plans" element={<Plans />} />
-              {/* <Route path="plans/:id" element={<Bookings />} /> */}
+              <Route path="plans/:planId" element={<Plan />} />
             </Route>
 
             <Route path="login" element={<Login />} />

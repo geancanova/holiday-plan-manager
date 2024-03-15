@@ -1,39 +1,44 @@
 import { useForm } from "react-hook-form";
-import { useCreatePlan } from "./useCreatePlan";
-import { useEditPlan } from "./useEditPlan";
-import { useTeams } from "./useTeams";
+import { useCreateHoliday } from "./useCreateHoliday";
+import { useEditHoliday } from "./useEditHoliday";
 
 import Input from "../../ui/Input";
 import Form from "../../ui/Form";
 import Button from "../../ui/Button";
-import Select from "../../ui/Select";
 import FormRow from "../../ui/FormRow";
 import Textarea from "../../ui/Textarea";
-import Spinner from "../../ui/Spinner";
+import { useParams } from "react-router";
 
-function CreatePlanForm({ planToEdit = {}, onCloseModal }) {
-  const { isCreating, createPlan } = useCreatePlan();
-  const { isEditing, editPlan } = useEditPlan();
-  const { isLoading, teams } = useTeams();
+function CreateHolidayForm({ holidayToEdit = {}, onCloseModal }) {
+  const { isCreating, createHoliday } = useCreateHoliday();
+  const { isEditing, editHoliday } = useEditHoliday();
+  const isWorking = isCreating || isEditing;
+  const planId = useParams().planId;
 
-  const isWorking = isLoading || isCreating || isEditing;
-  const {
-    id: editId,
-    teams: { id: planTeamId } = {},
-    ...editValues
-  } = planToEdit;
+  console.log(planId);
 
+  const { id: editId, ...editValues } = holidayToEdit;
   const isEditSession = Boolean(editId);
 
   const { register, handleSubmit, reset, formState } = useForm({
-    defaultValues: isEditSession ? editValues : {},
+    defaultValues: isEditSession
+      ? {
+          ...editValues,
+          date: new Date(editValues.date).toISOString().split("T")[0],
+        }
+      : {
+          planId: Number(planId),
+        },
   });
   const { errors } = formState;
 
+  console.log(editValues);
+  console.log(formState.defaultValues);
+
   function onSubmit(data) {
     if (isEditSession) {
-      editPlan(
-        { newPlanData: { ...data }, id: editId },
+      editHoliday(
+        { newHolidayData: { ...data }, id: editId },
         {
           onSuccess: () => {
             reset();
@@ -42,7 +47,7 @@ function CreatePlanForm({ planToEdit = {}, onCloseModal }) {
         }
       );
     } else {
-      createPlan(
+      createHoliday(
         { ...data },
         {
           onSuccess: () => {
@@ -58,8 +63,6 @@ function CreatePlanForm({ planToEdit = {}, onCloseModal }) {
     // Just to made know that this function exists. Can be used to send error reports to a service, e.g.
     console.log(errors);
   }
-
-  if (isLoading) return <Spinner />;
 
   return (
     <Form
@@ -87,18 +90,15 @@ function CreatePlanForm({ planToEdit = {}, onCloseModal }) {
         />
       </FormRow>
 
-      <FormRow label="Participants" error={errors?.teamId?.message}>
-        <Select
-          id="participants"
-          defaultValue={planTeamId || ""}
+      <FormRow label="Description" error={errors?.date?.message}>
+        <Input
+          type="date"
+          id="date"
           disabled={isWorking}
-          options={teams.map(({ id, title }) => ({
-            value: id,
-            label: title,
-          }))}
-          {...register("teamId", {
+          {...register("date", {
             required: "This field is required",
-            valueAsNumber: true,
+            valueAsDate: true,
+            onChange: (e) => console.log(e.target.value),
           })}
         />
       </FormRow>
@@ -112,11 +112,11 @@ function CreatePlanForm({ planToEdit = {}, onCloseModal }) {
           Cancel
         </Button>
         <Button disabled={isWorking}>
-          {isEditSession ? "Edit plan" : "Create new plan"}
+          {isEditSession ? "Edit holiday" : "Create new holiday"}
         </Button>
       </FormRow>
     </Form>
   );
 }
 
-export default CreatePlanForm;
+export default CreateHolidayForm;

@@ -1,5 +1,6 @@
-import { HiPencil, HiTrash } from "react-icons/hi2";
+import { HiEye, HiPencil, HiTrash } from "react-icons/hi2";
 import { useDeletePlan } from "./useDeletePlan";
+import { useNavigate } from "react-router";
 
 import Table from "../../ui/Table";
 import Menus from "../../ui/Menus";
@@ -8,6 +9,7 @@ import ConfirmDelete from "../../ui/ConfirmDelete";
 import CreatePlanForm from "./CreatePlanForm";
 
 function PlanRow({ plan }) {
+  const navigate = useNavigate();
   const { isDeleting, deletePlan } = useDeletePlan();
 
   const {
@@ -29,6 +31,13 @@ function PlanRow({ plan }) {
         <Menus.Menu>
           <Menus.Toggle id={planId} />
           <Menus.List id={planId}>
+            <Menus.Button
+              icon={<HiEye />}
+              onClick={() => navigate(`/plans/${planId}`)}
+            >
+              See plan details
+            </Menus.Button>
+
             <Modal.Open opens="edit">
               <Menus.Button icon={<HiPencil />}>Edit</Menus.Button>
             </Modal.Open>
