@@ -24,4 +24,3 @@ dist-ssr
 *.sw?
 
 supabase-bd.txt
-/src/services/supabase.js
