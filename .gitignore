@@ -23,4 +23,5 @@ dist-ssr
 *.sln
 *.sw?
 
+supabase-bd.txt
 /src/services/supabase.js
