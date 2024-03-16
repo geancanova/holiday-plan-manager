@@ -1,10 +1,10 @@
 import styled, { css } from "styled-components";
 const sizes = {
   small: css`
-    height: 3.5rem;
+    max-height: 3.5rem;
   `,
   medium: css`
-    height: 5rem;
+    max-height: 5rem;
   `,
 };
 
@@ -14,7 +14,6 @@ const StyledLogo = styled.div`
 
 const Img = styled.img`
   display: block;
-  height: 5rem;
   width: auto;
   margin: auto;
   ${(props) => sizes[props.$size]}
