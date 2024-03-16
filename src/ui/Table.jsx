@@ -1,13 +1,18 @@
 import { createContext, useContext } from "react";
 import styled from "styled-components";
 
-const StyledTable = styled.div`
+const TableContainer = styled.div`
   border: 1px solid var(--color-grey-200);
+  width: 100%;
+  border-radius: 7px;
+  overflow: auto;
+`;
 
+const StyledTable = styled.div`
+  display: table;
+  min-width: 100%;
   font-size: 1.4rem;
   background-color: var(--color-grey-0);
-  border-radius: 7px;
-  overflow: hidden;
 `;
 
 const CommonRow = styled.div`
@@ -19,14 +24,13 @@ const CommonRow = styled.div`
 `;
 
 const StyledHeader = styled(CommonRow)`
-  padding: 1.6rem 2.4rem;
-
   background-color: var(--color-grey-50);
   border-bottom: 1px solid var(--color-grey-100);
   text-transform: uppercase;
   letter-spacing: 0.4px;
-  font-weight: 600;
   color: var(--color-grey-600);
+  font-weight: 600;
+  padding: 1.6rem 2.4rem;
 `;
 
 const StyledRow = styled(CommonRow)`
@@ -65,7 +69,9 @@ const TableContext = createContext();
 function Table({ columns, children }) {
   return (
     <TableContext.Provider value={{ columns }}>
-      <StyledTable role="table">{children}</StyledTable>
+      <TableContainer>
+        <StyledTable role="table">{children}</StyledTable>
+      </TableContainer>
     </TableContext.Provider>
   );
 }

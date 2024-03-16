@@ -8,10 +8,17 @@ const StyledPageHeader = styled.div`
   align-items: center;
   justify-content: space-between;
   align-items: flex-end;
+
+  @media (max-width: 767px) {
+    align-items: flex-start;
+    flex-direction: column;
+  }
 `;
 
 const StyledPageHeaderHeading = styled.div`
-  max-width: 64rem;
+  @media (min-width: 767px) {
+    max-width: 64rem;
+  }
   p {
     margin-top: 2rem;
   }
