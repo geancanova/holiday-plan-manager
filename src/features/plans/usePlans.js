@@ -26,13 +26,13 @@ export function usePlans() {
   if (page < pageCount)
     queryClient.prefetchQuery({
       queryKey: ["plans", page + 1],
-      queryFn: () => getPlans({ page: page + 1 }),
+      queryFn: () => getPlans(page + 1),
     });
 
   if (page > 1)
     queryClient.prefetchQuery({
       queryKey: ["plans", page - 1],
-      queryFn: () => getPlans({ page: page - 1 }),
+      queryFn: () => getPlans(page - 1),
     });
 
   return { isLoading, error, plans, count };
