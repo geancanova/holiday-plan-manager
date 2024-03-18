@@ -3,9 +3,12 @@ import styled from "styled-components";
 const StyledFormRow = styled.div`
   display: grid;
   align-items: center;
-  grid-template-columns: 24rem 1fr 1.2fr;
-  gap: 2.4rem;
+  gap: 1rem;
 
+  @media (min-width: 768px) {
+    grid-template-columns: 15rem 3fr 2fr;
+    gap: 2.4rem;
+  }
   padding: 1.2rem 0;
 
   &:first-child {
