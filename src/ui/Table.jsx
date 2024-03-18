@@ -8,101 +8,101 @@ const TableContainer = styled.div`
   overflow: auto;
 `;
 
-const StyledTable = styled.div`
-  display: table;
+const StyledTable = styled.table`
   min-width: 100%;
   font-size: 1.4rem;
+  border-collapse: collapse;
   background-color: var(--color-grey-0);
 `;
 
-const CommonRow = styled.div`
-  display: grid;
-  grid-template-columns: ${(props) => props.$columns};
-  column-gap: 2.4rem;
-  align-items: center;
+const CommonRow = styled.tr`
   transition: none;
+
+  > * {
+    vertical-align: middle;
+    padding: 1.2rem 2.4rem;
+  }
 `;
 
-const StyledHeader = styled(CommonRow)`
+const StyledHeader = styled.thead`
   background-color: var(--color-grey-50);
-  border-bottom: 1px solid var(--color-grey-100);
-  text-transform: uppercase;
   letter-spacing: 0.4px;
   color: var(--color-grey-600);
   font-weight: 600;
-  padding: 1.6rem 2.4rem;
+  text-transform: uppercase;
+
+  tr > * {
+    border-bottom: 1px solid var(--color-grey-100);
+    text-align: left;
+  }
+
+  &.actions {
+    tr > *:last-child {
+      width: 40px;
+    }
+  }
 `;
 
 const StyledRow = styled(CommonRow)`
-  padding: 1.2rem 2.4rem;
-
   &:not(:last-child) {
-    border-bottom: 1px solid var(--color-grey-100);
+    > * {
+      border-bottom: 1px solid var(--color-grey-100);
+    }
   }
 `;
 
-const StyledBody = styled.section`
-  margin: 0.4rem 0;
-`;
-
-const Footer = styled.footer`
-  background-color: var(--color-grey-50);
-  display: flex;
-  justify-content: center;
-  padding: 1.2rem;
-
-  /* This will hide the footer when it contains no child elements. Possible thanks to the parent selector :has 🎉 */
-  &:not(:has(*)) {
-    display: none;
-  }
-`;
-
-const Empty = styled.p`
+const Empty = styled.td`
   font-size: 1.6rem;
   font-weight: 500;
   text-align: center;
-  margin: 2.4rem;
+  padding: 2.4rem;
 `;
 
 const TableContext = createContext();
 
-function Table({ columns, children }) {
+function Table({ children, actions = true }) {
+  const TableProvider = TableContext.Provider;
+
   return (
-    <TableContext.Provider value={{ columns }}>
-      <TableContainer>
+    <TableContainer>
+      <TableProvider value={{ actions }}>
         <StyledTable role="table">{children}</StyledTable>
-      </TableContainer>
-    </TableContext.Provider>
+      </TableProvider>
+    </TableContainer>
   );
 }
 
 function Header({ children }) {
-  const { columns } = useContext(TableContext);
+  const { actions } = useContext(TableContext);
 
   return (
-    <StyledHeader as="header" role="row" $columns={columns}>
-      {children}
+    <StyledHeader className={actions ? "actions" : ""}>
+      <StyledRow>{children}</StyledRow>
     </StyledHeader>
   );
 }
+
 function Row({ children }) {
-  const { columns } = useContext(TableContext);
-
-  return (
-    <StyledRow role="row" $columns={columns}>
-      {children}
-    </StyledRow>
-  );
+  return <StyledRow>{children}</StyledRow>;
 }
-function Body({ data, render }) {
-  if (!data.length) return <Empty>No data to show at the moment</Empty>;
 
-  return <StyledBody>{data.map(render)}</StyledBody>;
+function Body({ data, render }) {
+  return (
+    <tbody>
+      {!data?.length ? (
+        <StyledRow>
+          <Empty colSpan={100}>No data to show at the moment</Empty>
+        </StyledRow>
+      ) : (
+        data?.map(render)
+      )}
+    </tbody>
+  );
 }
 
 Table.Header = Header;
 Table.Row = Row;
 Table.Body = Body;
-Table.Footer = Footer;
+Table.Empty = Empty;
 
 export default Table;

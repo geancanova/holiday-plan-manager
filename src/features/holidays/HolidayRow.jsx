@@ -14,40 +14,42 @@ function HolidayRow({ holiday }) {
 
   return (
     <Table.Row>
-      <span>{title}</span>
+      <td>{title}</td>
 
-      <span>{description}</span>
+      <td>{description}</td>
 
-      <span>{formatDate}</span>
+      <td>{formatDate}</td>
 
-      <Modal>
-        <Menus>
-          <Menus.Menu>
-            <Menus.Toggle id={holidayId} />
-            <Menus.List id={holidayId}>
-              <Modal.Open opens="edit">
-                <Menus.Button icon={<HiPencil />}>Edit</Menus.Button>
-              </Modal.Open>
+      <td>
+        <Modal>
+          <Menus>
+            <Menus.Menu>
+              <Menus.Toggle id={holidayId} />
+              <Menus.List id={holidayId}>
+                <Modal.Open opens="edit">
+                  <Menus.Button icon={<HiPencil />}>Edit</Menus.Button>
+                </Modal.Open>
 
-              <Modal.Open opens="delete">
-                <Menus.Button icon={<HiTrash />}>Delete</Menus.Button>
-              </Modal.Open>
-            </Menus.List>
+                <Modal.Open opens="delete">
+                  <Menus.Button icon={<HiTrash />}>Delete</Menus.Button>
+                </Modal.Open>
+              </Menus.List>
 
-            <Modal.Window name="edit">
-              <CreateHolidayForm holidayToEdit={holiday} />
-            </Modal.Window>
+              <Modal.Window name="edit">
+                <CreateHolidayForm holidayToEdit={holiday} />
+              </Modal.Window>
 
-            <Modal.Window name="delete">
-              <ConfirmDelete
-                resourceName="holiday"
-                disabled={isDeleting}
-                onConfirm={() => deleteHoliday(holidayId)}
-              />
-            </Modal.Window>
-          </Menus.Menu>
-        </Menus>
-      </Modal>
+              <Modal.Window name="delete">
+                <ConfirmDelete
+                  resourceName="holiday"
+                  disabled={isDeleting}
+                  onConfirm={() => deleteHoliday(holidayId)}
+                />
+              </Modal.Window>
+            </Menus.Menu>
+          </Menus>
+        </Modal>
+      </td>
     </Table.Row>
   );
 }

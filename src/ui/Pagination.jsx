@@ -6,13 +6,13 @@ import { PAGE_SIZE } from "../utils/constants";
 const StyledPagination = styled.div`
   width: 100%;
   display: flex;
+  gap: 1rem;
   align-items: center;
   justify-content: space-between;
 `;
 
 const P = styled.p`
   font-size: 1.4rem;
-  margin-left: 0.8rem;
 
   & span {
     font-weight: 600;
@@ -41,11 +41,11 @@ const PaginationButton = styled.button`
   transition: all 0.3s;
 
   &:has(span:last-child) {
-    padding-left: 0.4rem;
+    padding-left: 0;
   }
 
   &:has(span:first-child) {
-    padding-right: 0.4rem;
+    padding-right: 0;
   }
 
   & svg {

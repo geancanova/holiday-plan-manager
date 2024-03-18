@@ -2,7 +2,6 @@ import styled from "styled-components";
 
 const StyledBreadcrumbs = styled.nav`
   background-color: var(--color-grey-100);
-  margin-bottom: 1rem;
   border-radius: var(--border-radius-md);
   padding: 0.5rem 1.2rem;
 `;

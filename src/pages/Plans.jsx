@@ -2,6 +2,7 @@ import PlanTable from "../features/plans/PlanTable";
 import Spinner from "../ui/Spinner";
 import PageHeader from "../ui/PageHeader";
 import Empty from "../ui/Empty";
+import Pagination from "../ui/Pagination";
 import AddPlan from "../features/plans/AddPlan";
 import { usePlans } from "../features/plans/usePlans";
 
@@ -16,10 +17,13 @@ function Plans() {
         <AddPlan />
       </PageHeader>
 
-      {!plans.length ? (
-        <Empty resourceName="plans" />
+      {plans.length ? (
+        <>
+          <PlanTable plans={plans} />
+          <Pagination count={count} />
+        </>
       ) : (
-        <PlanTable plans={plans} count={count} />
+        <Empty resourceName="plans" />
       )}
     </>
   );

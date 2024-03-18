@@ -10,23 +10,21 @@ function EmployeesTable({ teamId }) {
   if (isLoading) return <Spinner />;
 
   return (
-    <>
-      <Table columns="1fr 1fr 1fr 1fr">
-        <Table.Header>
-          <div>Name</div>
-          <div>Role</div>
-          <div>Department</div>
-          <div>Location</div>
-        </Table.Header>
+    <Table actions={false}>
+      <Table.Header>
+        <th>Name</th>
+        <th>Role</th>
+        <th>Department</th>
+        <th>Location</th>
+      </Table.Header>
 
-        <Table.Body
-          data={employees}
-          render={(employee) => (
-            <EmployeeRow key={employee.id} employee={employee} />
-          )}
-        />
-      </Table>
-    </>
+      <Table.Body
+        data={employees}
+        render={(employee) => (
+          <EmployeeRow key={employee.id} employee={employee} />
+        )}
+      />
+    </Table>
   );
 }
 

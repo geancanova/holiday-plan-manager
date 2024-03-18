@@ -21,45 +21,47 @@ function PlanRow({ plan }) {
 
   return (
     <Table.Row>
-      <span>{title}</span>
+      <td>{title}</td>
 
-      <span>{description}</span>
+      <td>{description}</td>
 
-      <span>{participants}</span>
+      <td>{participants}</td>
 
-      <Modal>
-        <Menus.Menu>
-          <Menus.Toggle id={planId} />
-          <Menus.List id={planId}>
-            <Menus.Button
-              icon={<HiEye />}
-              onClick={() => navigate(`/plans/${planId}`)}
-            >
-              See plan details
-            </Menus.Button>
+      <td>
+        <Modal>
+          <Menus.Menu>
+            <Menus.Toggle id={planId} />
+            <Menus.List id={planId}>
+              <Menus.Button
+                icon={<HiEye />}
+                onClick={() => navigate(`/plans/${planId}`)}
+              >
+                See plan details
+              </Menus.Button>
 
-            <Modal.Open opens="edit">
-              <Menus.Button icon={<HiPencil />}>Edit</Menus.Button>
-            </Modal.Open>
+              <Modal.Open opens="edit">
+                <Menus.Button icon={<HiPencil />}>Edit</Menus.Button>
+              </Modal.Open>
 
-            <Modal.Open opens="delete">
-              <Menus.Button icon={<HiTrash />}>Delete</Menus.Button>
-            </Modal.Open>
-          </Menus.List>
+              <Modal.Open opens="delete">
+                <Menus.Button icon={<HiTrash />}>Delete</Menus.Button>
+              </Modal.Open>
+            </Menus.List>
 
-          <Modal.Window name="edit">
-            <CreatePlanForm planToEdit={plan} />
-          </Modal.Window>
+            <Modal.Window name="edit">
+              <CreatePlanForm planToEdit={plan} />
+            </Modal.Window>
 
-          <Modal.Window name="delete">
-            <ConfirmDelete
-              resourceName="plan"
-              disabled={isDeleting}
-              onConfirm={() => deletePlan(planId)}
-            />
-          </Modal.Window>
-        </Menus.Menu>
-      </Modal>
+            <Modal.Window name="delete">
+              <ConfirmDelete
+                resourceName="plan"
+                disabled={isDeleting}
+                onConfirm={() => deletePlan(planId)}
+              />
+            </Modal.Window>
+          </Menus.Menu>
+        </Modal>
+      </td>
     </Table.Row>
   );
 }

@@ -5,13 +5,13 @@ function EmployeeRow({ employee }) {
 
   return (
     <Table.Row>
-      <span>{name}</span>
+      <td>{name}</td>
 
-      <span>{role}</span>
+      <td>{role}</td>
 
-      <span>{department}</span>
+      <td>{department}</td>
 
-      <span>{location}</span>
+      <td>{location}</td>
     </Table.Row>
   );
 }

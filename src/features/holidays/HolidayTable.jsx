@@ -10,23 +10,19 @@ function HolidayTable({ planId }) {
   if (isLoadingHolidays) return <Spinner />;
 
   return (
-    <>
-      <Table columns="1fr 1fr 1fr 3.2rem">
-        <Table.Header>
-          <div>Title</div>
-          <div>Description</div>
-          <div>Date</div>
-          <div></div>
-        </Table.Header>
+    <Table>
+      <Table.Header>
+        <th>Title</th>
+        <th>Description</th>
+        <th>Date</th>
+        <th></th>
+      </Table.Header>
 
-        <Table.Body
-          data={holidays}
-          render={(holiday) => (
-            <HolidayRow key={holiday.id} holiday={holiday} />
-          )}
-        />
-      </Table>
-    </>
+      <Table.Body
+        data={holidays}
+        render={(holiday) => <HolidayRow key={holiday.id} holiday={holiday} />}
+      />
+    </Table>
   );
 }
 
