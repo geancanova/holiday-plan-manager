@@ -15,8 +15,6 @@ function CreateHolidayForm({ holidayToEdit = {}, onCloseModal }) {
   const isWorking = isCreating || isEditing;
   const planId = useParams().planId;
 
-  console.log(planId);
-
   const { id: editId, ...editValues } = holidayToEdit;
   const isEditSession = Boolean(editId);
 
@@ -31,9 +29,6 @@ function CreateHolidayForm({ holidayToEdit = {}, onCloseModal }) {
         },
   });
   const { errors } = formState;
-
-  console.log(editValues);
-  console.log(formState.defaultValues);
 
   function onSubmit(data) {
     if (isEditSession) {
@@ -98,7 +93,6 @@ function CreateHolidayForm({ holidayToEdit = {}, onCloseModal }) {
           {...register("date", {
             required: "This field is required",
             valueAsDate: true,
-            onChange: (e) => console.log(e.target.value),
           })}
         />
       </FormRow>
