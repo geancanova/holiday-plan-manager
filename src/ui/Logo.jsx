@@ -1,3 +1,4 @@
+import { Link } from "react-router-dom";
 import styled, { css } from "styled-components";
 const sizes = {
   small: css`
@@ -22,11 +23,13 @@ const Img = styled.img`
 function Logo({ size }) {
   return (
     <StyledLogo>
-      <Img
-        $size={size}
-        src="/logo-holiday-plan-manager.png"
-        alt="Holiday Plan Manager"
-      />
+      <Link to="/">
+        <Img
+          $size={size}
+          src="/logo-holiday-plan-manager.png"
+          alt="Holiday Plan Manager"
+        />
+      </Link>
     </StyledLogo>
   );
 }
