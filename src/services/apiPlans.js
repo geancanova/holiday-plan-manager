@@ -4,7 +4,7 @@ import supabase from "./supabase";
 export async function getPlans(page) {
   let query = supabase
     .from("plans")
-    .select("id, created_at, title, description, teams(id, title)", { count: "exact" })
+    .select("id, created_at, title, description, teams(id, title)", { count: "exact" }).order("teamId", { ascending: true });
 
   // PAGINATION
   if (page) {

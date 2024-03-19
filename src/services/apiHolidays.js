@@ -1,7 +1,7 @@
 import supabase from "./supabase";
 
 export async function getHolidays(planId) {
-  const { data, error } = await supabase.from("holidays").select("*").eq("planId", planId);
+  const { data, error } = await supabase.from("holidays").select("*").eq("planId", planId).order("date", { ascending: true });
   if (error) {
     console.error(error);
     throw new Error("Holidays could not be loaded");
