@@ -7,7 +7,7 @@ function Logout() {
   const { logout, isLoading } = useLogout();
 
   return (
-    <ButtonIcon disabled={isLoading}>
+    <ButtonIcon disabled={isLoading} title="Logout">
       {!isLoading ? (
         <HiArrowRightOnRectangle onClick={logout} />
       ) : (
