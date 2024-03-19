@@ -10,6 +10,11 @@ const StyledNav = styled.nav`
   display: flex;
   align-items: center;
   gap: 0.8rem;
+
+  @media (max-width: 767px) {
+    flex-direction: column;
+    align-items: flex-start;
+  }
 `;
 
 const StyledBreadcrumbItem = styled.li`
@@ -26,9 +31,10 @@ const StyledBreadcrumbItem = styled.li`
     }
   }
 
-  & + & {
-    &::before {
-      content: ">";
+  &:not(:last-child)::after {
+    content: ">";
+    @media (max-width: 767px) {
+      transform: rotate(90deg);
     }
   }
 `;
