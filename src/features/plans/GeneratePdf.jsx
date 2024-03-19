@@ -88,7 +88,7 @@ function PlanHolidays({ holidays }) {
 function PlanEmployees({ employees }) {
   return (
     <View style={styles.section}>
-      <Text style={styles.subtitle}>Employees</Text>
+      <Text style={styles.subtitle}>Participants</Text>
       <View style={[styles.flex, { borderBottom: "none" }]}>
         <Text style={styles.colhead}>Name</Text>
         <Text style={styles.colhead}>Role</Text>
