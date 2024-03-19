@@ -6,6 +6,7 @@ const TableContainer = styled.div`
   width: 100%;
   border-radius: 7px;
   overflow: auto;
+  margin-bottom: 2rem;
 `;
 
 const StyledTable = styled.table`
