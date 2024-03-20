@@ -6,10 +6,11 @@ const StyledBreadcrumbs = styled.nav`
   padding: 0.5rem 1.2rem;
 `;
 
-const StyledNav = styled.nav`
+const StyledNavList = styled.ul`
   display: flex;
   align-items: center;
   gap: 0.8rem;
+  margin: 0;
 
   @media (max-width: 767px) {
     flex-direction: column;
@@ -42,7 +43,7 @@ const StyledBreadcrumbItem = styled.li`
 function Breadcrumbs({ children }) {
   return (
     <StyledBreadcrumbs>
-      <StyledNav>{children}</StyledNav>
+      <StyledNavList>{children}</StyledNavList>
     </StyledBreadcrumbs>
   );
 }
