@@ -16,6 +16,7 @@ const StyledLogo = styled.div`
 const Img = styled.img`
   display: block;
   width: auto;
+  height: auto;
   margin: auto;
   ${(props) => sizes[props.$size]}
 `;
@@ -28,6 +29,8 @@ function Logo({ size }) {
           $size={size}
           src="/logo-holiday-plan-manager.png"
           alt="Holiday Plan Manager"
+          width="480"
+          height="73"
         />
       </Link>
     </StyledLogo>
