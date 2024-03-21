@@ -1,4 +1,4 @@
-import React from "react";
+import { forwardRef } from "react";
 import styled from "styled-components";
 
 const StyledSelect = styled.select`
@@ -15,7 +15,7 @@ const StyledSelect = styled.select`
   box-shadow: var(--shadow-sm);
 `;
 
-const Select = React.forwardRef(
+const Select = forwardRef(
   ({ options, value, onChange, emptyValue = false, ...props }, ref) => (
     <StyledSelect ref={ref} value={value} onChange={onChange} {...props}>
       {emptyValue && <option value="">Select</option>}
